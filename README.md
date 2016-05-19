@@ -88,3 +88,12 @@ Spreadsheets require a header row that must adhere to the following guidelines:
 |    001    |    245 \\ $a   |   852 \1 $j   |    852 \1 $j [2]  |
 |:---------:|:--------------:|:-------------:|:-----------------:|
 |    123    |    some_value  | another_value |   another_value   |
+
+
+## Testing
+
+Tests can be run using:
+
+```
+python setup.py test
+```
