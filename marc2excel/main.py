@@ -67,7 +67,6 @@ class Converter(object):
         if not self.silent:
             sys.stdout.write('Saved: {0}\n'.format(out_path))
 
-
     def excel2marc(self, path, out_path, sheet=0, force_utf8=False):
         """Convert an Excel spreadsheet to a MARC file.
 
