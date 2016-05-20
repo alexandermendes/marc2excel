@@ -23,6 +23,8 @@ python setup.py install
 
 ### Running scripts:
 
+The following scripts can be run from anywhere, once the package is installed.
+
 Converting MARC to Excel:
 
 ```
@@ -52,8 +54,6 @@ Options:
   --help               Show this message and exit.
 ```
 
-The above scripts can be run from anywhere, once the package is installed.
-
 
 ### Running from Python:
 
@@ -81,11 +81,11 @@ Spreadsheets require a header row that must adhere to the following guidelines:
 - Backslashes should be used to indicate blank spaces in indicators.
 - Subfields should be prepended with a dollar symbol.
 - Leaders can be added from a column with the heading LDR (optional).
-- Repeated fields can be created by sequential appending headers with [number].
+- Repeated fields can be created by appending headers with [*number*].
 
 **Example:**
 
-|    001    |    245 \\ $a   |   852 \1 $j   |    852 \1 $j [2]  |
+|    001    |   245 \\\\ $a  |   852 \1 $j   |    852 \1 $j [2]  |
 |:---------:|:--------------:|:-------------:|:-----------------:|
 |    123    |    some_value  | another_value |   another_value   |
 
