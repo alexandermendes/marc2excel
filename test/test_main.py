@@ -38,4 +38,3 @@ class TestConverter():
         reader = pymarc.MARCReader(tmp_mrc)
         count = len([record for record in reader])
         assert count == 20
-
