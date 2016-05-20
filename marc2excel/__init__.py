@@ -22,7 +22,7 @@ def marc2excel(path, out_path, force_utf8=False, silent=True):
     :param silent: Don't display CLI progress.
     """
     converter = Converter(silent)
-    converter.marc2excel(path, out_path, force_utf8)
+    converter.marc2excel(path, out_path, force_utf8=force_utf8)
 
 
 def excel2marc(path, out_path, sheet=0, force_utf8=False, silent=True):
