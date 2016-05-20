@@ -100,7 +100,6 @@ class Converter(object):
                     # Leader
                     if tag == 'ldr':
                         record.leader = value
-                        print record.leader
                         continue
 
                     # Control field
