@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 import re
 from setuptools import setup
 
@@ -8,18 +6,19 @@ version = re.search('^__version__\s*=\s*"(.*)"',
                     open('marc2excel/__init__.py').read(),
                     re.M).group(1)
 
+try:
+    long_description = read("README.rst")
+except:
+    long_description = ""
 
-with open("README.md", "rb") as f:
-    long_description = f.read().decode("utf-8")
 
-
-requirements = ["openpyxl>=2.3.3, <3.0",
-                "pymarc>=3.1.2, <4.0",
+requirements = ["openpyxl>=2.3.0, <3.0",
+                "pymarc>=3.0, <4.0",
                 "click>=6.6, <7.0",
                 "tqdm>=4.7.0, <5.0"
                 ]
 
-setup_requirements = ["pytest-runner>=2.7.1, <3.0"]
+setup_requirements = ["pytest-runner>=2.6.0, <3.0"]
 
 test_requirements = ["pytest>=2.8.0, <3.0",
                      "pytest-cov>=2.2.0, <3.0",
