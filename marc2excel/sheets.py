@@ -44,11 +44,9 @@ class Sheets(object):
 
         headers = []
         data = []
-        print 'extracting...'
         for row in tqdm(ws.iter_rows(), unit="rows",
                         desc="Extracting Excel data", total=ws.max_row,
                         disable=self.silent):
-            print 'exex'
 
             if not headers:
                 headers = [cell.value for cell in row if cell.value]
