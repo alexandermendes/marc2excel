@@ -44,17 +44,19 @@ class Sheets(object):
 
         headers = []
         data = []
+        print 'extracting...'
         for row in tqdm(ws.iter_rows(), unit="rows",
                         desc="Extracting Excel data", total=ws.max_row,
                         disable=self.silent):
+            print 'exex'
 
             if not headers:
-                headers = [cell.value for cell in row]
+                headers = [cell.value for cell in row if cell.value]
                 self._validate_headers(headers, path)
                 continue
 
             record = {headers[cell.column - 1]: cell.value
-                      for cell in row if cell.column and cell.value}
+                      for cell in row if cell.value}
             data.append(record)
         return data
 
