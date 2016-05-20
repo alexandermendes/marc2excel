@@ -32,3 +32,10 @@ class TestConverter():
         ws = wb.get_active_sheet()
         assert ws.max_row == 21
         assert ws.max_column == 80
+
+    def test_marc2excel_and_excel2marc_compatible(self, marc_path, tmp_xlsx,
+                                                  tmp_mrc):
+        converter.marc2excel(marc_path, tmp_xlsx)
+        converter.excel2marc(tmp_xlsx, tmp_mrc.name)
+        assert list(open(marc_path, 'r')) == list(open(tmp_mrc.name, 'r'))
+
