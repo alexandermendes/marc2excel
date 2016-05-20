@@ -34,6 +34,12 @@ def bad_marc_path():
 
 
 @pytest.fixture()
+def xlsx_path():
+    here = os.path.dirname(__file__)
+    return os.path.join(here, 'samples', 'records.xlsx')
+
+
+@pytest.fixture()
 def marc_records():
     here = os.path.dirname(__file__)
     path = os.path.join(here, 'samples', 'marc_file.mrc')

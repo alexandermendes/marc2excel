@@ -26,16 +26,16 @@ class TestConverter():
         Converter.marc2excel.assert_called_once_with(tmp_mrc, tmp_xlsx,
                                                      force_utf8=False)
 
-    def test_marc2excel_writes_all_records(self, marc_path, tmp_xlsx):
+    def test_marc2excel_converts_all_records(self, marc_path, tmp_xlsx):
         converter.marc2excel(marc_path, tmp_xlsx)
         wb = openpyxl.load_workbook(tmp_xlsx)
         ws = wb.get_active_sheet()
         assert ws.max_row == 21
         assert ws.max_column == 80
 
-    def test_marc2excel_and_excel2marc_compatible(self, marc_path, tmp_xlsx,
-                                                  tmp_mrc):
-        converter.marc2excel(marc_path, tmp_xlsx)
-        converter.excel2marc(tmp_xlsx, tmp_mrc.name)
-        assert list(open(marc_path, 'r')) == list(open(tmp_mrc.name, 'r'))
+    def test_excel2marc_converts_all_records(self, xlsx_path, tmp_mrc):
+        converter.excel2marc(xlsx_path, tmp_mrc.name)
+        reader = pymarc.MARCReader(tmp_mrc)
+        count = len([record for record in reader])
+        assert count == 20
 
