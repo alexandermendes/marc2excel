@@ -29,6 +29,7 @@ class Converter(object):
         if not self.silent:
             sys.stdout.write('Processing: {0}\n'.format(path))
         headings = set()
+        headings.add('LDR')
         records = []
         with open(path, 'rb') as marc_file:
             reader = pymarc.MARCReader(marc_file, force_utf8=force_utf8)
@@ -99,6 +100,7 @@ class Converter(object):
                     # Leader
                     if tag == 'ldr':
                         record.leader = value
+                        print record.leader
                         continue
 
                     # Control field

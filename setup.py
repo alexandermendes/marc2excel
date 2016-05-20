@@ -21,10 +21,9 @@ requirements = ["openpyxl>=2.3.3, <3.0",
 
 setup_requirements = ["pytest-runner>=2.7.1, <3.0"]
 
-test_requirements = ["mock",
-                     "pytest>=2.8.0, <3.0",
+test_requirements = ["pytest>=2.8.0, <3.0",
                      "pytest-cov>=2.2.0, <3.0",
-                     ]
+                     "pytest-mock>=0.11.0, <1.0"]
 
 setup(
     name='marc2excel',

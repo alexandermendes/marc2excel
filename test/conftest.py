@@ -3,7 +3,9 @@
 import os
 import pytest
 import tempfile
+import openpyxl
 from pymarc import MARCReader
+from pytest_mock import mocker
 
 
 @pytest.fixture()
@@ -44,10 +46,15 @@ def marc_records():
 
 
 @pytest.fixture()
-def tmp_marc_file():
+def tmp_mrc():
     return tempfile.NamedTemporaryFile(suffix='.mrc')
 
 
 @pytest.fixture()
-def tmp_sheet():
-    return tempfile.NamedTemporaryFile(suffix='.xlsx')
+def tmp_xlsx():
+    xlsx = tempfile.NamedTemporaryFile(suffix='.xlsx')
+    wb = openpyxl.Workbook(write_only=True)
+    ws = wb.create_sheet()
+    ws.append([''])
+    wb.save(xlsx)
+    return xlsx
