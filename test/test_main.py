@@ -1,10 +1,7 @@
 # -*- coding: utf8 -*-
 
-import os
 import openpyxl
 import pymarc
-import filecmp
-import tempfile
 import marc2excel
 from marc2excel.main import Converter
 from pytest_mock import mocker

@@ -4,7 +4,6 @@
 import re
 import openpyxl
 from tqdm import tqdm
-from collections import OrderedDict
 from marc2excel.exceptions import InvalidMARCCodeError
 
 
