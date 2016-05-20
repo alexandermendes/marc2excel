@@ -39,3 +39,6 @@ test-output/
 # virtualenv
 venv/
 ENV/
+
+# Excel
+~$*.xlsx
