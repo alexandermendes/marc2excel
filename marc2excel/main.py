@@ -44,8 +44,9 @@ class Converter(object):
                         headings.add(heading)
 
                     if hasattr(field, 'subfields'):
-                        heading = '{0} {1}'.format(heading,
-                                                   ''.join(field.indicators))
+                        i1 = field.indicator1.replace(' ', '\\')
+                        i2 = field.indicator1.replace(' ', '\\')
+                        heading = '{0} {1}{2}'.format(heading, i1, i2)
 
                         # Split subfields
                         c = [code for code in field.subfields[::2]]
