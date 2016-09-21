@@ -13,7 +13,7 @@ except:
 
 
 requirements = ["openpyxl>=2.3.0, <3.0",
-                "pymarc>=3.0, <4.0",
+                "pymarc>=3.1.5, <4.0",
                 "click>=6.6, <7.0",
                 "tqdm>=4.7.0, <5.0"
                 ]
