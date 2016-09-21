@@ -5,7 +5,9 @@ python:
   - "3.4"
   - "3.5"
 install:
+  - pip install -U pip
   - pip install -U pytest pytest-cov pytest-runner coveralls pep8
+  - python setup.py install
 script:
   - python setup.py test
   - pep8
