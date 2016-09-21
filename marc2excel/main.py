@@ -3,6 +3,7 @@
 
 import re
 import sys
+import six
 import pymarc
 from tqdm import tqdm
 from marc2excel.sheets import Sheets
@@ -26,7 +27,7 @@ class Converter(object):
         :param force_utf8: Force UTF8 encoding.
         """
         if not self.silent:
-            sys.stdout.write('Processing: {0}\n'.format(path))
+            sys.stdout.write('\nProcessing: {0}\n'.format(path))
         headings = set()
         headings.add('LDR')
         records = []
@@ -34,7 +35,18 @@ class Converter(object):
             utf8_handling = 'replace' if force_utf8 else 'strict'
             reader = pymarc.MARCReader(marc_file, force_utf8=force_utf8,
                                        utf8_handling=utf8_handling)
-            for record in reader:
+            pos = 0
+            while True:
+                pos += 1
+                try:
+                    record = six.next(reader)
+                except StopIteration:
+                    break
+                except UnicodeDecodeError as e:
+                    if not self.silent:
+                        msg = "ERROR: Couldn't decode record {0}\n".format(pos)
+                        sys.stdout.write(msg)
+
                 rec_dict = {'LDR': record.leader}
                 rheadings = []
                 for field in record.fields:
@@ -79,7 +91,7 @@ class Converter(object):
         :param force_utf8: Force UTF8 encoding.
         """
         if not self.silent:
-            sys.stdout.write('Processing: {0}\n'.format(path))
+            sys.stdout.write('\nProcessing: {0}\n'.format(path))
         data = self.sheets.extract_data(path, sheet)
         with open(out_path, 'wb') as out_file:
             for item in tqdm(data, desc="Writing MARC data", unit="records",
