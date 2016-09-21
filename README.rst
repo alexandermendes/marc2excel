@@ -48,9 +48,17 @@ Converting MARC to Excel:
       directory with .mrc, .marc or .lex extensions will be converted and the
       .xlsx versions saved in the same directory.
 
+      The option to force utf-8 encoding is included to help deal with any
+      poorly formed MARC records that you might encounter. For example, those
+      that are utf-8 encoded but without the leader set appropriately, or those
+      that contain mostly utf-8 data but with a few non-utf-8 characters (any
+      non-utf-8 characters will be replaced with the official U+FFFD REPLACEMENT
+      CHARACTER).
+
     Options:
       -d        Specify a directory for MARC_PATH.
       --silent  Don't display progress.
+      --utf8    Force utf-8 encoding.
       --help    Show this message and exit.
 
 
@@ -69,10 +77,18 @@ Converting Excel to MARC:
       directory with .xlsx extensions will be converted and the .mrc versions
       saved in the same directory.
 
-      Options:
-        -d        Specify a directory for EXCEL_PATH.
-        --silent  Don't display progress.
-        --help    Show this message and exit.
+      The option to force utf-8 encoding is included to help deal with any
+      poorly formed data found in the spreadsheet. For example, where rows
+      contain data that is utf-8 encoded but without the leader set
+      appropriately, or rows that contain mostly utf-8 data but with a few non-
+      utf-8 characters (any non-utf-8 characters will be replaced with the
+      official U+FFFD REPLACEMENT CHARACTER).
+
+    Options:
+      -d        Specify a directory for EXCEL_PATH.
+      --silent  Don't display progress.
+      --utf8    Force utf-8 encoding.
+      --help    Show this message and exit.
 
 
 Running from Python:
