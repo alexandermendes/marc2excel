@@ -17,7 +17,6 @@ class Converter(object):
     def __init__(self, silent=True):
         self.silent = silent
         self.sheets = Sheets(silent)
-        self.errors = []
 
     def marc2excel(self, path, out_path, force_utf8=False):
         """Convert a MARC file to an Excel spreadsheet.
