@@ -31,7 +31,6 @@ class TestSheets():
                 ['0', '123', 't1', 't2', 't3'], ['0', '456', 't4', 't5', 't6']]
         self.create_workbook(tmp_xlsx, data)
         extracted = sheets.extract_data(tmp_xlsx, 0)
-        print extracted
         ret = [{u'ldr': u'0', u'001': u'123', u'245\\\\$a': u't1',
                 u'245\\\\$a[2]': u't2', u'245\\\\$b[2]': u't3'},
                {u'ldr': u'0', u'001': u'456', u'245\\\\$a': u't4',
