@@ -10,7 +10,7 @@ from .main import Converter
 
 __author__ = "Alexander Mendes"
 __license__ = "BSD License"
-__version__ = "0.1.1"
+__version__ = "0.1.2"
 
 
 def marc2excel(path, out_path, force_utf8=False, silent=True):

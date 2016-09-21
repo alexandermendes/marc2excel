@@ -49,6 +49,7 @@ class Sheets(object):
 
             if not headers:
                 headers = [cell.value for cell in row if cell.value]
+                headers = self._convert_old_headers(headers)
                 self._validate_headers(headers, path)
                 continue
 
@@ -56,6 +57,18 @@ class Sheets(object):
                       for cell in row if cell.value}
             data.append(record)
         return data
+
+    def _convert_old_headers(self, headers):
+        """Convert headers to cover deprecated format."""
+        new_headers = []
+        marc_re = re.compile(r'\[[1-9]+\]')
+        for h in headers:
+            new_header = h
+            m = marc_re.search(h)
+            if m:
+                new_header = marc_re.sub('', h) + m.group(0)
+            new_headers.append(new_header)
+        return new_headers
 
     def _validate_headers(self, headers, path):
         """Validate headers extracted from an Excel spreadsheet."""

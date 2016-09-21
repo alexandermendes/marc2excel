@@ -27,14 +27,15 @@ class TestSheets():
         assert ws.max_row == 2
 
     def test_extract_valid_data(self, tmp_xlsx):
-        data = [['ldr', '001', '245\\\\$a', '245\\\\$a[2]'],
-                ['0', '123', 't1', 't2'], ['0', '456', 't3', 't4']]
+        data = [['ldr', '001', '245\\\\$a', '245\\\\$a[2]', '245\\\\[2]$b'],
+                ['0', '123', 't1', 't2', 't3'], ['0', '456', 't4', 't5', 't6']]
         self.create_workbook(tmp_xlsx, data)
         extracted = sheets.extract_data(tmp_xlsx, 0)
+        print extracted
         ret = [{u'ldr': u'0', u'001': u'123', u'245\\\\$a': u't1',
-                u'245\\\\$a[2]': u't2'},
-               {u'ldr': u'0', u'001': u'456', u'245\\\\$a': u't3',
-                u'245\\\\$a[2]': u't4'}]
+                u'245\\\\$a[2]': u't2', u'245\\\\$b[2]': u't3'},
+               {u'ldr': u'0', u'001': u'456', u'245\\\\$a': u't4',
+                u'245\\\\$a[2]': u't5', u'245\\\\$b[2]': u't6'}]
         assert extracted == ret
 
     def test_extract_invalid_field_code(self, tmp_xlsx):
