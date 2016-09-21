@@ -12,17 +12,22 @@ except:
     long_description = ""
 
 
-requirements = ["openpyxl>=2.3.0, <3.0",
-                "pymarc>=3.1.5, <4.0",
-                "click>=6.6, <7.0",
-                "tqdm>=4.7.0, <5.0"
-                ]
+requirements = [
+    "openpyxl>=2.3.0, <3.0",
+    "pymarc>=3.1.5, <4.0",
+    "click>=6.6, <7.0",
+    "tqdm>=4.7.0, <5.0"
+]
 
-setup_requirements = ["pytest-runner>=2.6.0, <3.0"]
+setup_requirements = [
+    "pytest-runner>=2.9, <3.0",
+]
 
-test_requirements = ["pytest>=2.8.0, <3.0",
-                     "pytest-cov>=2.2.0, <3.0",
-                     "pytest-mock>=0.11.0, <1.0"]
+test_requirements = [
+    "pytest>=3.0, <4.0",
+    "pytest-cov>=2.3.1, <3.0",
+    "pytest-mock>=1.0, <2.0"
+]
 
 setup(
     name='marc2excel',
