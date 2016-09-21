@@ -7,31 +7,43 @@ from marc2excel import excel2marc
 
 
 @click.command()
-@click.argument('source_path', type=str)
-@click.argument('save_path', type=str)
-@click.option('-s', '--sheet', default=0,
-              help="Index of the sheet from which to extract data.")
+@click.argument('excel_path', type=str)
 @click.option('-d', flag_value=True, default="False",
-              help='Specify directories for SOURCE_PATH and SAVE_PATH.')
+              help='Specify a directory for EXCEL_PATH.')
 @click.option('--silent', flag_value=True, default="False",
               help="Don't display progress.")
-def main(source_path, save_path, sheet=0, d=False, silent=False):
-    """Convert Excel (.xlsx) to MARC (.mrc)"""
+def main(excel_path, d=False, silent=False):
+    """Convert EXCEL_PATH to an MARC file.
+
+    The path to the saved MARC file will be the same as EXCEL_PATH but with a
+    .mrc extension.
+
+    If a directory is specified for EXCEL_PATH all files found in that
+    directory with .xlsx extensions will be converted and the .mrc versions
+    saved in the same directory.
+    """
     if not silent:
         sys.stdout.write('Running Excel to MARC conversion\n')
 
     if not d:
-        excel2marc(source_path, save_path, sheet=sheet, silent=silent)
+        save_path = _get_save_path(excel_path)
+        excel2marc(excel_path, save_path, silent=silent)
     else:
-        paths = (os.path.join(source_path, f) for f in os.listdir(source_path)
+        paths = (os.path.join(excel_path, f) for f in os.listdir(excel_path)
                  if not f.startswith('.') and f.lower().endswith('.xlsx'))
         for p in paths:
-            fn = '{0}.mrc'.format(os.path.splitext(os.path.basename(p))[0])
-            out_path = os.path.join(save_path, p)
-            excel2marc(source_path, save_path, sheet=sheet, silent=silent)
+            save_path = _get_save_path(p)
+            excel2marc(p, save_path, silent=silent)
 
     if not silent:
         sys.stdout.write('Finished\n')
+
+
+def _get_save_path(path):
+    """Return """
+    fn = os.path.splitext(os.path.basename(path))[0]
+    d = os.path.dirname(path)
+    return os.path.join(d, fn + '.mrc')
 
 
 if __name__ == '__main__':
