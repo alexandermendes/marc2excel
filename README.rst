@@ -37,28 +37,42 @@ Converting MARC to Excel:
 
 ::
 
-    Usage: marc2excel_cli.py [OPTIONS] SOURCE_PATH SAVE_PATH
+    Usage: marc2excel_cli.py [OPTIONS] MARC_PATH
 
-      Convert MARC (.mrc, .marc) to Excel (.xlsx)
+      Convert MARC_PATH to an Excel spreadsheet.
+
+      The path to the saved spreadsheet will be the same as MARC_PATH but with a
+      .xlsx extension.
+
+      If a directory is specified for MARC_PATH all files found in that
+      directory with .mrc, .marc or .lex extensions will be converted and the
+      .xlsx versions saved in the same directory.
 
     Options:
-      -d        Specify directories for SOURCE_PATH and SAVE_PATH.
+      -d        Specify a directory for MARC_PATH.
       --silent  Don't display progress.
       --help    Show this message and exit.
+
 
 Converting Excel to MARC:
 
 ::
 
-    Usage: excel2marc_cli.py [OPTIONS] SOURCE_PATH SAVE_PATH
+    Usage: excel2marc_cli.py [OPTIONS] EXCEL_PATH
 
-      Convert Excel (.xlsx) to MARC (.mrc)
+      Convert EXCEL_PATH to an MARC file.
 
-    Options:
-      -s, --sheet INTEGER  Index of the sheet from which to extract data.
-      -d                   Specify directories for SOURCE_PATH and SAVE_PATH.
-      --silent             Don't display progress.
-      --help               Show this message and exit.
+      The path to the saved MARC file will be the same as EXCEL_PATH but with a
+      .mrc extension.
+
+      If a directory is specified for EXCEL_PATH all files found in that
+      directory with .xlsx extensions will be converted and the .mrc versions
+      saved in the same directory.
+
+      Options:
+        -d        Specify a directory for EXCEL_PATH.
+        --silent  Don't display progress.
+        --help    Show this message and exit.
 
 
 Running from Python:
