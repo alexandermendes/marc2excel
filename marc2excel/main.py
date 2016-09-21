@@ -19,12 +19,11 @@ class Converter(object):
         self.sheets = Sheets(silent)
         self.errors = []
 
-    def marc2excel(self, path, out_path, force_utf8=False):
+    def marc2excel(self, path, out_path):
         """Convert a MARC file to an Excel spreadsheet.
 
         :param path: Path to the MARC file.
         :param out_path: Path to save the Excel spreadsheet.
-        :param force_utf8: Force decoding of records as UTF8.
         """
         if not self.silent:
             sys.stdout.write('Processing: {0}\n'.format(path))
@@ -32,7 +31,8 @@ class Converter(object):
         headings.add('LDR')
         records = []
         with open(path, 'rb') as marc_file:
-            reader = pymarc.MARCReader(marc_file, force_utf8=force_utf8)
+            reader = pymarc.MARCReader(marc_file, force_utf8=True,
+                                       to_unicode=True, utf8_handling='ignore')
             for record in reader:
                 rec_dict = {'LDR': record.leader}
                 rheadings = []
@@ -69,13 +69,12 @@ class Converter(object):
         if not self.silent:
             sys.stdout.write('Saved: {0}\n'.format(out_path))
 
-    def excel2marc(self, path, out_path, sheet=0, force_utf8=False):
+    def excel2marc(self, path, out_path, sheet=0):
         """Convert an Excel spreadsheet to a MARC file.
 
         :param path: Path to the Excel spreadsheet.
         :param out_path: Path to save the MARC file.
         :param sheet: The index of the sheet from which to extract data.
-        :param force_utf8: Force encoding or records as UTF8.
         """
         if not self.silent:
             sys.stdout.write('Processing: {0}\n'.format(path))
@@ -83,7 +82,8 @@ class Converter(object):
         with open(out_path, 'wb') as out_file:
             for item in tqdm(data, desc="Writing MARC data", unit="records",
                              disable=self.silent):
-                record = pymarc.Record(force_utf8=force_utf8)
+                record = pymarc.Record(force_utf8=True, to_unicode=True,
+                                       utf8_handling='ignore')
                 for k in sorted(item):
                     value = item[k]
                     key = re.sub(r'\s+', '', k.lower())

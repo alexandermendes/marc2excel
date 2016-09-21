@@ -43,7 +43,6 @@ Converting MARC to Excel:
 
     Options:
       -d        Specify directories for SOURCE_PATH and SAVE_PATH.
-      --utf8    Force records to be decoded as UTF-8.
       --silent  Don't display progress.
       --help    Show this message and exit.
 
@@ -58,7 +57,6 @@ Converting Excel to MARC:
     Options:
       -s, --sheet INTEGER  Index of the sheet from which to extract data.
       -d                   Specify directories for SOURCE_PATH and SAVE_PATH.
-      --utf8               Force records to be encoded as UTF-8.
       --silent             Don't display progress.
       --help               Show this message and exit.
 
