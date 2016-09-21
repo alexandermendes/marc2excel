@@ -31,8 +31,7 @@ class Converter(object):
         headings.add('LDR')
         records = []
         with open(path, 'rb') as marc_file:
-            reader = pymarc.MARCReader(marc_file, force_utf8=True,
-                                       to_unicode=True, utf8_handling='ignore')
+            reader = pymarc.MARCReader(marc_file, utf8_handling='replace')
             for record in reader:
                 rec_dict = {'LDR': record.leader}
                 rheadings = []
@@ -82,8 +81,7 @@ class Converter(object):
         with open(out_path, 'wb') as out_file:
             for item in tqdm(data, desc="Writing MARC data", unit="records",
                              disable=self.silent):
-                record = pymarc.Record(force_utf8=True, to_unicode=True,
-                                       utf8_handling='ignore')
+                record = pymarc.Record(utf8_handling='replace')
                 for k in sorted(item):
                     value = item[k]
                     key = re.sub(r'\s+', '', k.lower())
